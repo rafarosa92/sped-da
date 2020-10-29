@@ -26,7 +26,7 @@ class Damdfe extends DaCommon
     protected $yDados = 0;
     protected $xml; // string XML NFe
     protected $errMsg = ''; // mesagens de erro
-    protected $errStatus = false;// status de erro TRUE um erro ocorreu false sem erros
+    protected $errStatus = false; // status de erro TRUE um erro ocorreu false sem erros
     protected $formatoChave = "#### #### #### #### #### #### #### #### #### #### ####";
     protected $margemInterna = 2;
     protected $id;
@@ -196,7 +196,7 @@ class Damdfe extends DaCommon
                 $maxH = 210;
                 $maxW = 297;
             }
-        }//orientação
+        } //orientação
         //largura imprimivel em mm
         $this->wPrint = $maxW - ($margEsq + $xInic);
         //comprimento imprimivel em mm
@@ -692,7 +692,8 @@ class Damdfe extends DaCommon
         $x1 += $x2;
         $this->pdf->textBox($x1, $y, $x2, 12);
 
-        if ($this->rodo
+        if (
+            $this->rodo
             || $this->aereo
             || $this->ferrov
         ) {
@@ -1189,14 +1190,14 @@ class Damdfe extends DaCommon
         $aFont = array('font' => $this->fontePadrao, 'size' => 8, 'style' => '');
         $this->pdf->textBox($x, $y, $x2, 8, $texto, $aFont, 'T', 'L', 0, '', false);
         //$y = $this->hPrint - 4;
-        $y = $this->hPrint+8;
+        $y = $this->hPrint + 8;
         $texto = "Impresso em  " . date('d/m/Y H:i:s') . ' ' . $this->creditos;
         $w = $this->wPrint - 4;
         $aFont = array('font' => $this->fontePadrao, 'size' => 6, 'style' => 'I');
         $this->pdf->textBox($x, $y, $w, 4, $texto, $aFont, 'T', 'L', 0, '');
         $texto = '';
         if ($this->powered) {
-            $texto = "Powered by NFePHP®";
+            $texto = "Powered by Sidedoor®";
         }
         $this->pdf->textBox($x, $y, $w, 0, $texto, $aFont, 'T', 'R', false, '');
     }
