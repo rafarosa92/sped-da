@@ -5,16 +5,25 @@ require_once '../../bootstrap.php';
 
 use NFePHP\DA\CTe\Dacte;
 
-$xml = file_get_contents(__DIR__ . '/fixtures/cte_hom_com_prot.xml');
+$xml = file_get_contents('php://input');
 //$logo = 'data://text/plain;base64,'. base64_encode(file_get_contents(realpath(__DIR__ . '/../images/tulipas.png')));
 // $logo = realpath(__DIR__ . '/../images/tulipas.png');
 
 try {
+
+    if ($_SERVER['REQUEST_METHOD'] != 'POST') {
+
+        throw new Exception('Método incorreto!');
+    }
+    if (empty($xml)) {
+        throw new Exception('Você deve enviar um XML de um CT-e');
+    }
+
     //instanciação da classe (OBRIGATÓRIO)
     $da = new Dacte($xml);
 
     //Métodos públicos (TODOS OPCIONAIS)
-    $da->debugMode(true);
+    $da->debugMode(false);
     //$da->printParameters('P', 'A4', 2, 2);
     $da->creditsIntegratorFooter('| Sidedoor { } - https://sidedoor.com.br');
     $da->setDefaultFont('times');
@@ -26,7 +35,10 @@ try {
     //Renderização do PDF  (OBRIGATÓRIO)
     $pdf = $da->render();
     header('Content-Type: application/pdf');
-    echo $pdf;
-} catch (InvalidArgumentException $e) {
-    echo "Ocorreu um erro durante o processamento :" . $e->getMessage();
+    echo  base64_encode($pdf);
+} catch (Exception $e) {
+
+    header('Content-Type: application/json');
+    header('HTTP/1.1 400 Bad Request', true, 400);
+    echo json_encode(["Error" => $e->getMessage()]);
 }
