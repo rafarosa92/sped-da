@@ -34,7 +34,7 @@ try {
 
     //Renderização do PDF  (OBRIGATÓRIO)
     $pdf = $da->render();
-    header('Content-Type: application/pdf');
+    header('Content-Type: application/pdf;base64');
     echo  base64_encode($pdf);
 } catch (Exception $e) {
 
