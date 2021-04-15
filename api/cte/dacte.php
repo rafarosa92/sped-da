@@ -35,8 +35,8 @@ try {
     //Renderização do PDF  (OBRIGATÓRIO)
     $pdf = $da->render();
     header('Content-Type: application/pdf;base64; charset=UTF-8');
-    // echo  base64_encode($pdf);
-    print_r($da);
+    echo  base64_encode($pdf);
+    // print_r($da);
 } catch (Exception $e) {
 
     header('Content-Type: application/json');
