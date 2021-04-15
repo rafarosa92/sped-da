@@ -7,7 +7,7 @@ use NFePHP\DA\CTe\Dacte;
 
 $xml = file_get_contents('php://input');
 //$logo = 'data://text/plain;base64,'. base64_encode(file_get_contents(realpath(__DIR__ . '/../images/tulipas.png')));
-// $logo = realpath(__DIR__ . '/../images/tulipas.png');
+$logo = realpath(__DIR__ . '/../images/contrail.jpg');
 
 try {
 
@@ -23,11 +23,11 @@ try {
     $da = new Dacte($xml);
 
     //Métodos públicos (TODOS OPCIONAIS)
-    $da->debugMode(false);
+    $da->debugMode(true);
     //$da->printParameters('P', 'A4', 2, 2);
     $da->creditsIntegratorFooter('| Sidedoor { } - https://sidedoor.com.br');
     $da->setDefaultFont('times');
-    // $da->logoParameters($logo, 'C', false);
+    $da->logoParameters($logo, 'C', false);
     $da->setDefaultDecimalPlaces(2);
     //$da->depecNumber('12345678');
 
@@ -35,7 +35,8 @@ try {
     //Renderização do PDF  (OBRIGATÓRIO)
     $pdf = $da->render();
     header('Content-Type: application/pdf;base64; charset=UTF-8');
-    echo  base64_encode($pdf);
+    // echo  base64_encode($pdf);
+    print_r($da);
 } catch (Exception $e) {
 
     header('Content-Type: application/json');

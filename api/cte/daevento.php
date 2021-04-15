@@ -6,30 +6,31 @@ require_once '../../bootstrap.php';
 
 use NFePHP\DA\CTe\Daevento;
 
-$xml = file_get_contents(__DIR__ . '/fixtures/proccce.xml');
+// $xml = file_get_contents(__DIR__ . '/fixtures/proccce.xml');
 //$logo = 'data://text/plain;base64,'. base64_encode(file_get_contents(realpath(__DIR__ . '/../images/tulipas.png')));
-$logo = realpath(__DIR__ . '/../images/tulipas.png');
+// $logo = realpath(__DIR__ . '/../images/tulipas.png');
+$xml = file_get_contents('php://input');
 
 $dadosEmitente = [
-    'razao' => 'QQ Comercio e Ind. Ltda',
-    'logradouro' => 'Rua vinte e um de março',
-    'numero' => '200',
-    'complemento' => 'sobreloja',
-    'bairro' => 'Nova Onda',
-    'CEP' => '99999-999',
-    'municipio' => 'Onda',
-    'UF' => 'MG',
-    'telefone' => '33333-3333',
-    'email' => 'qq@gmail.com'
+    'razao' => 'CONTRAIL LOGISTICA S.A',
+    'logradouro' => 'AV ANTONIO FREDERICO OZANAN',
+    'numero' => '1805',
+    'complemento' => '',
+    'bairro' => 'VILA SANTANA II',
+    'CEP' => '13219-001',
+    'municipio' => 'CAJAMAR',
+    'UF' => 'SP',
+    'telefone' => '(13)3367-1303',
+    'email' => 'sim@sidedoor.com.br'
 ];
 
 try {
     $daevento = new Daevento($xml, $dadosEmitente);
     $daevento->debugMode(true);
-    $daevento->creditsIntegratorFooter('WEBNFe Sistemas - http://www.webenf.com.br');
-    $pdf = $daevento->render($logo);
-    header('Content-Type: application/pdf');
-    echo $pdf;
+    $daevento->creditsIntegratorFooter('| Sidedoor { } - https://sidedoor.com.br');
+    $pdf = $daevento->render();
+    header('Content-Type: application/pdf;base64; charset=UTF-8');
+    echo  base64_encode($pdf);
 } catch (\Exception $e) {
     echo $e->getMessage();
 }
