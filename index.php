@@ -15,5 +15,8 @@ Route::add('/cte_to_pdf', function () {
     require __DIR__ . '/api/cte/dacte.php';
 }, 'post');
 
+Route::add('/nfe_to_pdf', function () {
+    require __DIR__ . '/api/nfe/danfe.php';
+}, 'post');
 
 Route::run('/sped-da/api/v1');
