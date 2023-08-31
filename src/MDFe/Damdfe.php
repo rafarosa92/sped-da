@@ -818,7 +818,7 @@ class Damdfe extends DaCommon
         // chave de acesso
         $this->pdf->textBox($x + $maxW / 2, $y + 4, $maxW / 2, 17, '', $this->baseFont, 'T', 'L', 0);
         $aFont = array('font' => $this->fontePadrao, 'size' => 8, 'style' => 'B');
-        $tsHora = $this->toTimestamp($this->dhEvento);
+        // $tsHora = $this->toTimestamp($this->dhEvento); comentando pq $dhEvento ta null
         $texto = 'Chave de Acesso';
         $this->pdf->textBox($x + $maxW / 2, $y + 4, $maxW / 2, 6, $texto, $aFont, 'T', 'L', 0, '');
         $aFont = array('font' => $this->fontePadrao, 'size' => 10, 'style' => '');
