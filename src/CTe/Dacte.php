@@ -1602,15 +1602,19 @@ class Dacte extends DaCommon
         $tamanho = 0;
         foreach ($this->infQ as $infQ) {
             //caso p 2tpUnid não exista colocar ??
+            $unidade = in_array($this->getTagValue($infQ, "cUnid"), array_keys($tpUnid)) ?
+                $tpUnid[$this->getTagValue($infQ, "cUnid")] : '??';
 
-            $texto = $this->getTagValue($infQ, "tpMed") . ' - ' . $tpUnid[$this->getTagValue($infQ, "cUnid")];
+            $texto = $this->getTagValue($infQ, "tpMed") . ' - ' . $unidade;
             $tamanho += strlen($texto);
         };
         $tamanho = $w / $tamanho;
 
         foreach ($this->infQ as $infQ) {
 
-            $texto = $this->getTagValue($infQ, "tpMed") . ' - ' . $tpUnid[$this->getTagValue($infQ, "cUnid")];
+            $unidade = in_array($this->getTagValue($infQ, "cUnid"), array_keys($tpUnid)) ?
+                $tpUnid[$this->getTagValue($infQ, "cUnid")] : '??';
+            $texto = $this->getTagValue($infQ, "tpMed") . ' - ' . $unidade;
             $tamanho_texto = (strlen($texto)) * $tamanho;
             $aFont = array(
                 'font' => $this->fontePadrao,
@@ -3823,4 +3827,3 @@ class Dacte extends DaCommon
         $this->pdf->image($pic, $xQr - 3, $yQr, $wQr, $hQr, 'PNG');
     }
 }
-
