@@ -5,12 +5,11 @@ require_once realpath(__DIR__ . '/../../bootstrap.php');
 
 use NFePHP\DA\CTe\Dacte;
 
+// $xml = file_get_contents(__DIR__ . "/fixtures/cte.xml"); # pra debugar
 $xml = file_get_contents('php://input');
-//$logo = 'data://text/plain;base64,'. base64_encode(file_get_contents(realpath(__DIR__ . '/../images/tulipas.png')));
-// $logo = realpath(__DIR__ . '/../images/contrail.jpg');
+$logo = realpath(__DIR__ . '/../images/contrail_logo.jpg');
 
 try {
-
     if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 
         throw new Exception('Método incorreto!');
@@ -33,7 +32,7 @@ try {
 
 
     //Renderização do PDF  (OBRIGATÓRIO)
-    $pdf = $da->render();
+    $pdf = $da->render($logo);
     header('Content-Type: application/pdf;base64; charset=UTF-8');
     echo  base64_encode($pdf);
     // print_r($da);

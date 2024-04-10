@@ -740,6 +740,9 @@ class Dacte extends DaCommon
             case '5':
                 $texto = 'Dutoviário';
                 break;
+            case '6';
+                $texto = 'Multimodal';
+                break;
         }
         $aFont = array(
             'font' => $this->fontePadrao,
