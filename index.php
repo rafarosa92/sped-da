@@ -1,4 +1,5 @@
 <?php
+
 // Include router class
 include('Route.php');
 
@@ -23,4 +24,4 @@ Route::add('/mdfe_to_pdf', function () {
     require __DIR__ . '/api/mdfe/damdfe.php';
 }, 'post');
 
-Route::run('/sped-da/api/v1');
+Route::run('/api/v1');
